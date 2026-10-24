@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Padel Hall — Glass Court Club</title>
+  <link rel="icon" href="../Images/VIP.png" />
+
+  <!-- سكربت أمان: لو فشل أي ملف خارجي، الصفحة تنفتح بعد 5 ثوانٍ مهما حدث -->
+  <script>
+    document.documentElement.classList.add('js');
+    setTimeout(function () {
+      if (!document.body) return;
+      document.body.classList.remove('is-loading');
+      document.body.classList.add('is-ready');
+      var p = document.getElementById('preloader');
+      if (p) p.style.display = 'none';
+    }, 5000);
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../CSS/style.css" />
+
+  <noscript><style>.preloader{display:none}body.is-loading{overflow:auto}</style></noscript>
+</head>
+<body class="is-loading">
+
+  <!-- حبيبات فيلم خفيفة -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- كرسور مخصص -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="c-dot" id="cDot"></div>
+    <div class="c-ring" id="cRing"><div class="c-ring-in"><span class="mono" id="cLabel"></span></div></div>
+  </div>
+
+  <!-- توست تنبيهات -->
+  <div class="toast" id="toast" role="status"><span id="toastMsg"></span></div>
+
+  <!-- ============ البريلودر (يعمل بدون أي مكتبة) ============ -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="pre-inner">
+      <img class="pre-logo" src="../Images/VIP.png" alt="The Padel Hall logo" />
+      <div class="pre-name mono">THE&nbsp;PADEL&nbsp;HALL</div>
+    </div>
+    <div class="pre-count" id="preCount">000</div>
+    <div class="pre-bar"><span id="preBar"></span></div>
+  </div>
+
+  <!-- ============ النافبار ============ -->
+  <header class="nav" id="nav">
+    <a class="nav-brand" href="#home">
+      <img src="../Images/VIP.png" alt="The Padel Hall" />
+      <span>THE PADEL<b>HALL</b></span>
+    </a>
+    <nav class="nav-links mono" aria-label="Primary">
+      <a href="#club">Club</a>
+      <a href="#moments">Moments</a>
+      <a href="#experience">Experience</a>
+      <a href="#train">Train</a>
+      <a href="#shop">Shop</a>
+    </nav>
+    <div class="nav-right">
+      <a class="btn btn-volt btn-sm" href="#join">Book</a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- قائمة الموبايل -->
+  <nav class="menu" id="menu" aria-hidden="true">
+    <a class="m-link" style="--i:0" href="#club"><span class="mono m-idx">01</span>Club</a>
+    <a class="m-link" style="--i:1" href="#moments"><span class="mono m-idx">02</span>Moments</a>
+    <a class="m-link" style="--i:2" href="#experience"><span class="mono m-idx">03</span>Experience</a>
+    <a class="m-link" style="--i:3" href="#train"><span class="mono m-idx">04</span>Train</a>
+    <a class="m-link" style="--i:4" href="#shop"><span class="mono m-idx">05</span>Shop</a>
+    <a class="m-link" style="--i:5" href="#join"><span class="mono m-idx">06</span>Book a court</a>
+    <div class="menu-foot mono">
+      <a href="https://www.instagram.com/thepadelhall/" target="_blank" rel="noopener">@thepadelhall ↗</a>
+      <span>All levels · All week</span>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ============ الهيرو: ملعب زجاجي 3D ============ -->
+    <section class="hero" id="home" data-cursor="drag">
+      <div class="hero-canvas" id="courtWrap">
+        <canvas id="courtCanvas"></canvas>
+        <!-- بديل ثابت لو تعذر تحميل Three.js -->
+        <div class="court-fallback" id="courtFallback">
+          <img src="../Images/VIP.png" alt="" />
+        </div>
+      </div>
+
+      <div class="canvas-hint mono">Drag to spin — tap to smash</div>
+
+      <div class="badge" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <defs><path id="circPath" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs>
+          <text><textPath href="#circPath">THE PADEL HALL • SEE YOU ON COURT • </textPath></text>
+        </svg>
+        <img src="../Images/VIP.png" alt="" />
+      </div>
+
+      <div class="hero-inner">
+        <h1 class="hero-title">
+          <span class="line"><span class="line-in">THE</span></span>
+          <span class="line"><span class="line-in stroke">PADEL</span></span>
+          <span class="line"><span class="line-in">HALL<span class="ball-dot"></span></span></span>
+        </h1>
+
+        <div class="hero-side">
+          <ul class="hero-meta mono">
+            <li>Glass-court padel club</li>
+            <li>@thepadelhall · 4.8K community</li>
+            <li>All levels · All week</li>
+          </ul>
+          <div class="hero-cta">
+            <a class="btn btn-volt magnet" href="#join">Book a court</a>
+            <a class="btn btn-ghost magnet" href="#experience">
+              Watch the film
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-foot mono">
+        <div class="scroll-cue"><span>Scroll</span><span class="s-line"></span></div>
+        <span class="hf-right">Glass · Community · Match nights</span>
+      </div>
+    </section>
+
+    <!-- ============ شريط متحرك ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="m-track">
+        <div class="m-group">
+          <span class="m-word">The Padel Hall</span><span class="m-dot"></span>
+          <span class="m-word outline">Glass Courts</span><span class="m-dot"></span>
+          <span class="m-word">Match Nights</span><span class="m-dot"></span>
+          <span class="m-word outline">Community</span><span class="m-dot"></span>
+          <span class="m-word">Brush Hub</span><span class="m-dot"></span>
+        </div>
+        <div class="m-group">
+          <span class="m-word">The Padel Hall</span><span class="m-dot"></span>
+          <span class="m-word outline">Glass Courts</span><span class="m-dot"></span>
+          <span class="m-word">Match Nights</span><span class="m-dot"></span>
+          <span class="m-word outline">Community</span><span class="m-dot"></span>
+          <span class="m-word">Brush Hub</span><span class="m-dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 01 النادي ============ -->
+    <section class="sec about" id="club">
+      <div class="sec-head" data-reveal>
+        <span class="mono idx">(01)</span><span class="rule"></span><span class="mono tag">The Club</span>
+      </div>
+
+      <p class="manifesto" id="manifesto">
+        More than four walls of <em>glass</em> — The Padel Hall is where rallies become
+        <em>rituals</em> and strangers leave as <em>doubles partners</em>. A club built by
+        players, for players, one match at a time.
+      </p>
+
+      <div class="about-grid">
+        <figure class="about-media plx" data-reveal>
+          <video src="../Videos/1.mp4" muted loop playsinline preload="metadata"></video>
+          <figcaption class="mono">Live from the Hall — 001</figcaption>
+        </figure>
+
+        <div class="about-right">
+          <div class="about-copy" data-reveal>
+            <p>
+              From first-time grips to midnight match nights, everything here happens between
+              those glass walls. Sessions, tournaments, community days — and every rally
+              documented on the feed.
+            </p>
+            <a class="btn btn-ghost btn-sm magnet" href="https://www.instagram.com/thepadelhall/" target="_blank" rel="noopener">
+              Follow the feed
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+          <figure class="about-media offset plx" data-reveal>
+            <img src="../Images/1.png" alt="Inside The Padel Hall" loading="lazy" />
+            <figcaption class="mono">The glass, up close — 002</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="stats" data-reveal>
+        <div class="stat">
+          <div class="stat-num"><span class="cnt" data-count="135">135</span></div>
+          <div class="stat-lab mono">Posts on the feed</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><span class="cnt" data-count="4833" data-comma>4,833</span></div>
+          <div class="stat-lab mono">Players following</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><span class="cnt" data-count="7">7</span></div>
+          <div class="stat-lab mono">Days a week</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><span class="cnt" data-count="100">100</span><span class="suffix">%</span></div>
+          <div class="stat-lab mono">Community</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 معرض أفقي ============ -->
+    <section class="gal" id="moments">
+      <div class="gal-pin">
+        <div class="sec-head gal-head">
+          <span class="mono idx">(02)</span><span class="rule"></span><span class="mono tag">Moments</span>
+        </div>
+
+        <div class="gal-track" id="galTrack">
+          <div class="gal-panel gal-intro">
+            <h2>INSIDE<br /><span class="stroke">THE HALL</span></h2>
+            <p class="mono gal-note">Scroll — the moments move sideways</p>
+          </div>
+
+          <figure class="gal-panel" style="--w:58vw">
+            <div class="gal-imgwrap"><img src="../Images/2.png" alt="Match night" loading="lazy" draggable="false" /></div>
+            <figcaption class="mono">02 — Match night under the lights</figcaption>
+          </figure>
+
+          <figure class="gal-panel" style="--w:40vw">
+            <div class="gal-imgwrap"><img src="../Images/3.png" alt="Behind the glass" loading="lazy" draggable="false" /></div>
+            <figcaption class="mono">03 — Behind the glass</figcaption>
+          </figure>
+
+          <figure class="gal-panel" style="--w:52vw">
+            <div class="gal-imgwrap"><img src="../Images/4.png" alt="The community" loading="lazy" draggable="false" /></div>
+            <figcaption class="mono">04 — The crew</figcaption>
+          </figure>
+
+          <div class="gal-panel gal-end">
+            <a class="gal-cta magnet" href="https://www.instagram.com/thepadelhall/" target="_blank" rel="noopener">
+              Follow @thepadelhall
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="gal-progress"><span id="galBar"></span></div>
+      </div>
+    </section>
+
+    <!-- ============ 03 الفيلم المتوسّع ============ -->
+    <section class="exp" id="experience">
+      <div class="exp-stage">
+        <div class="exp-frame" id="expFrame">
+          <video id="filmVideo" src="../Videos/2.mp4" muted loop playsinline preload="metadata"></video>
+          <div class="exp-title"><h2>FEEL<br /><span class="stroke">THE RALLY</span></h2></div>
+          <div class="exp-cap mono">The Padel Hall — Session film 002</div>
+          <button class="exp-sound" id="soundBtn" aria-label="Toggle sound">
+            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" stroke="none"/><path d="M16.5 8.5a5 5 0 010 7M19 6a8.5 8.5 0 010 12"/>
+            </svg>
+            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" stroke="none"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5"/>
+            </svg>
+            <span class="mono">Sound</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 التدريب ============ -->
+    <section class="sec train" id="train">
+      <div class="sec-head" data-reveal>
+        <span class="mono idx">(04)</span><span class="rule"></span><span class="mono tag">Train</span>
+      </div>
+
+      <div class="train-grid">
+        <figure class="train-media plx" data-reveal>
+          <video src="../Videos/3.mp4" muted loop playsinline preload="metadata"></video>
+          <figcaption class="mono">On-court session — 003</figcaption>
+        </figure>
+        <div class="train-copy" data-reveal>
+          <h2 class="train-title">
+            <span class="t-row">TRAIN<span class="t-dot">.</span></span>
+            <span class="t-row stroke">PLAY.</span>
+            <span class="t-row">REPEAT<span class="t-dot">.</span></span>
+          </h2>
+          <p>Structured drills, open match nights and one-to-one coaching on the glass. Tell us your level — we take care of the rest.</p>
+          <a class="btn btn-volt magnet" href="#join">Join a session</a>
+        </div>
+      </div>
+
+      <ul class="sessions" id="sessions">
+        <li class="session" style="--i:0" data-reveal><a href="https://www.instagram.com/thepadelhall/" target="_blank" rel="noopener">
+          <span class="s-idx mono">01</span><span class="s-name">Open Match Nights</span>
+          <span class="s-desc mono">All levels · weekly fixtures</span>
+          <span class="s-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        </a></li>
+        <li class="session" style="--i:1" data-reveal><a href="https://www.instagram.com/thepadelhall/" target="_blank" rel="noopener">
+          <span class="s-idx mono">02</span><span class="s-name">Beginner Clinics</span>
+          <span class="s-desc mono">First grip to first rally</span>
+          <span class="s-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        </a></li>
+        <li class="session" style="--i:2" data-reveal><a href="https://www.instagram.com/thepadelhall/" target="_blank" rel="noopener">
+          <span class="s-idx mono">03</span><span class="s-name">Performance Drills</span>
+          <span class="s-desc mono">Structured training blocks</span>
+          <span class="s-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        </a></li>
+        <li class="session" style="--i:3" data-reveal><a href="https://www.instagram.com/thepadelhall/" target="_blank" rel="noopener">
+          <span class="s-idx mono">04</span><span class="s-name">Private Coaching</span>
+          <span class="s-desc mono">One-to-one on the glass</span>
+          <span class="s-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        </a></li>
+      </ul>
+
+      <!-- معاينة تتبع الكرسور -->
+      <div class="float-preview" id="floatPreview" aria-hidden="true">
+        <div class="fp-inner">
+          <img class="fp-img" src="../Images/2.png" alt="" loading="lazy" />
+          <img class="fp-img" src="../Images/3.png" alt="" loading="lazy" />
+          <img class="fp-img" src="../Images/4.png" alt="" loading="lazy" />
+          <img class="fp-img" src="../Images/1.png" alt="" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 متجر Brush Hub ============ -->
+    <section class="sec shop" id="shop">
+      <div class="sec-head" data-reveal>
+        <span class="mono idx">(05)</span><span class="rule"></span><span class="mono tag">Pro Shop</span>
+      </div>
+
+      <div class="shop-top">
+        <h2 data-reveal>BRUSH HUB<span class="t-dot">.</span><br /><span class="stroke-ink">PRO SHOP</span></h2>
+        <p data-reveal>
+          Our on-court pro shop, powered by <strong>Brush Hub</strong> — rackets, bags and kit,
+          picked by our coaches and tested on our own glass. Order by DM, pick up at the club.
+        </p>
+      </div>
+
+      <div class="products">
+        <article class="product p1" style="--i:0" data-reveal>
+          <figure><img src="../Images/11.png" alt="Brush Hub padel racket" loading="lazy" /></figure>
+          <div class="p-meta">
+            <div class="p-line1 mono"><span>01</span><span>Brush Hub</span></div>
+            <div class="p-line2">
+              <span class="p-name">Pro Carbon Racket</span>
+              <a class="p-cta mono" href="https://www.instagram.com/thepadelhall/" target="_blank" rel="noopener">Order via DM
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product p2" style="--i:1" data-reveal>
+          <figure><img src="../Images/22.png" alt="Brush Hub court bag" loading="lazy" /></figure>
+          <div class="p-meta">
+            <div class="p-line1 mono"><span>02</span><span>Brush Hub</span></div>
+            <div class="p-line2">
+              <span class="p-name">Court Bag 24L</span>
+              <a class="p-cta mono" href="https://www.instagram.com/thepadelhall/" target="_blank" rel="noopener">Order via DM
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product p3" style="--i:2" data-reveal>
+          <figure><img src="../Images/33.png" alt="Brush Hub match kit" loading="lazy" /></figure>
+          <div class="p-meta">
+            <div class="p-line1 mono"><span>03</span><span>Brush Hub</span></div>
+            <div class="p-line2">
+              <span class="p-name">Match Kit</span>
+              <a class="p-cta mono" href="https://www.instagram.com/thepadelhall/" target="_blank" rel="noopener">Order via DM
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <div class="shop-cta" data-reveal>
+          <h3 class="mono">Sizing &amp; restocks</h3>
+          <p>DM us your size or ask at the front desk — new Brush Hub drops land every month.</p>
+          <a class="p-cta mono" href="https://www.instagram.com/thepadelhall/" target="_blank" rel="noopener">Message the shop
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="shop-strip mono" data-reveal>
+        <span>Brush Hub × The Padel Hall</span><span>Order by DM</span><span>Pickup at the club</span>
+      </div>
+    </section>
+
+    <!-- ============ 06 احجز ============ -->
+    <section class="sec join" id="join">
+      <div class="sec-head" data-reveal>
+        <span class="mono idx">(06)</span><span class="rule"></span><span class="mono tag">Join</span>
+      </div>
+
+      <h2 class="join-title" data-lines>
+        <span class="jmask"><span class="jline">READY</span></span>
+        <span class="jmask"><span class="jline">TO</span></span>
+        <span class="jmask"><span class="jline stroke">PLAY?</span></span>
+      </h2>
+
+      <a class="btn-magnet magnet" href="https://www.instagram.com/thepadelhall/" target="_blank" rel="noopener" data-reveal>
+        Book your court
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+
+      <div class="join-meta" data-reveal>
+        <button class="handle mono" id="copyHandle" title="Tap to copy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="18" height="18">
+            <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
+          </svg>
+          @thepadelhall — tap to copy
+        </button>
+        <span class="mono jm-item">DMs open — all levels welcome</span>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ الفوتر ============ -->
+  <footer>
+    <div class="foot-marquee" aria-hidden="true">
+      <div class="fm-track">
+        <span>THE PADEL HALL — SEE YOU ON COURT — THE PADEL HALL — SEE YOU ON COURT —&nbsp;</span>
+        <span>THE PADEL HALL — SEE YOU ON COURT — THE PADEL HALL — SEE YOU ON COURT —&nbsp;</span>
+      </div>
+    </div>
+    <div class="foot-bar mono">
+      <span>© 2025 The Padel Hall</span>
+      <a href="https://www.instagram.com/thepadelhall/" target="_blank" rel="noopener">Instagram ↗</a>
+      <button id="toTop">Back to top ↑</button>
+    </div>
+  </footer>
+
+  <!-- المكتبات + الكود -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="../JS/script.js"></script>
+</body>
+</html>
